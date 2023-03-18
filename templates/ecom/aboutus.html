@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Simple E-commerce</title>
+  <style media="screen">
+    .footer{
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body style="background-color:#f7f7f7;">
+  {%if request.user.is_authenticated%}
+    {% include "ecom/customer_navbar.html" %}
+  {%else%}
+    {% include "ecom/navbar.html" %}
+  {%endif%}
+  <br><br><br>
+<h3 style="text-align:center;">"Welcome to our antique shop, where we bring the beauty and history of the past into the present. Our shop is a treasure trove of unique and rare finds, from antique furniture and vintage clothing to rare collectibles and one-of-a-kind artwork.
+
+
+Our passion for antiques started at a young age and has grown into a lifelong love affair with all things vintage. We've spent years scouring the world for the most unique and interesting pieces, carefully curating a collection that we're proud to share with our customers.
+
+
+At our antique shop, we believe that every item has a story to tell. We love learning about the history and provenance of each piece, and we're always happy to share our knowledge with our customers. Whether you're a seasoned collector or just starting to explore the world of antiques, we're here to help you find that special something that speaks to your heart.
+
+
+Our commitment to quality is evident in everything we do. We take great care to ensure that every item in our shop is authentic, in good condition, and priced fairly. We believe that antiques should be accessible to everyone, and we're always happy to work with our customers to find a piece that fits their budget and their style.
+
+
+Thank you for visiting our antique shop, and we look forward to helping you discover the beauty and wonder of the past." </h3>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  {% include "ecom/footer.html" %}
+</body>
+<!--
+developed By : Tapan k ghosh
+-->
+
+</html>
