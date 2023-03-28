@@ -155,13 +155,13 @@ a.socialIcon:hover,
                   {% csrf_token %}
                     <h1>Customer Sign Up</h1>
                     
-                      {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
-                        {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
-                          {% render_field userForm.username class="form-control" placeholder="Username" %}
-                            {% render_field userForm.password class="form-control" placeholder="Password" %}
-                              {% render_field customerForm.address class="form-control" placeholder="Address" %}
-                                {% render_field customerForm.mobile class="form-control" placeholder="Contact" %}
-                                  {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
+                      {% render_field userForm.first_name class="form-control" placeholder="First Name" required=True %}
+                        {% render_field userForm.last_name class="form-control" placeholder="Last Name" required=True %}
+                          {% render_field userForm.username class="form-control" placeholder="Username" required=True %}
+                            {% render_field userForm.password class="form-control" placeholder="Password" required=True %}
+                              {% render_field customerForm.address class="form-control" placeholder="Address" required=True %}
+                                {% render_field customerForm.mobile class="form-control" type="tel" minlength="10" maxlength="10" placeholder="Contact" required=True %}
+                                  {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" required=True %}
                   
                      <input type="submit" name="" value="Create">
 

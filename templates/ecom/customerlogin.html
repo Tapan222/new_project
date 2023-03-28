@@ -151,8 +151,8 @@ a.socialIcon:hover,
                   {% csrf_token %}
                     <h1>Customer Login</h1>
                     
-                               {% render_field form.username class="form-control" placeholder="Username" autocomplete="off" %}
-                               {% render_field form.password class="form-control" placeholder="Password" %}
+                               {% render_field form.username class="form-control" placeholder="Username" autocomplete="off" required=True %}
+                               {% render_field form.password class="form-control" placeholder="Password" minlength="8" required=True %}
                      <input type="submit" name="" value="Login" >
 
                 </form>

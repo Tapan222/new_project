@@ -204,23 +204,62 @@ def view_feedback_view(request):
 #---------------------------------------------------------------------------------
 #------------------------ PUBLIC CUSTOMER RELATED VIEWS START ---------------------
 #---------------------------------------------------------------------------------
+# def search_view(request):
+#     # whatever user write in search box we get in query
+#     query = request.GET['query']
+#     products=models.Product.objects.all().filter(name__icontains=query)
+#     if 'product_ids' in request.COOKIES:
+#         product_ids = request.COOKIES['product_ids']
+#         counter=product_ids.split('|')
+#         product_count_in_cart=len(set(counter))
+#     else:
+#         product_count_in_cart=0
+
+#     # word variable will be shown in html when user click on search button
+#     word="Searched Result :"
+
+#     if request.user.is_authenticated:
+#         return render(request,'ecom/customer_home.html',{'products':products,'word':word,'product_count_in_cart':product_count_in_cart})
+#     return render(request,'ecom/index.html',{'products':products,'word':word,'product_count_in_cart':product_count_in_cart})
+
 def search_view(request):
-    # whatever user write in search box we get in query
-    query = request.GET['query']
-    products=models.Product.objects.all().filter(name__icontains=query)
+    query = request.GET.get('query')
+    if query is not None:
+        products = models.Product.objects.filter(name__icontains=query)
+    else:
+        products = models.Product.objects.all()
+
+    sort = request.GET.get('sort')
+
+    if sort == 'price_asc':
+        products = products.order_by('price')
+    elif sort == 'price_desc':
+        products = products.order_by('-price')
+
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
-        counter=product_ids.split('|')
-        product_count_in_cart=len(set(counter))
+        counter = product_ids.split('|')
+        product_count_in_cart = len(set(counter))
     else:
-        product_count_in_cart=0
+        product_count_in_cart = 0
 
-    # word variable will be shown in html when user click on search button
-    word="Searched Result :"
+    word = "Searched Result:"
 
     if request.user.is_authenticated:
-        return render(request,'ecom/customer_home.html',{'products':products,'word':word,'product_count_in_cart':product_count_in_cart})
-    return render(request,'ecom/index.html',{'products':products,'word':word,'product_count_in_cart':product_count_in_cart})
+        return render(request, 'ecom/customer_home.html', {
+            'products': products,
+            'word': word,
+            'product_count_in_cart': product_count_in_cart,
+            'sort': sort
+        })
+    else:
+        return render(request, 'ecom/index.html', {
+            'products': products,
+            'word': word,
+            'product_count_in_cart': product_count_in_cart,
+            'sort': sort
+        })
+
 
 
 # any one can add product to cart, no need of signin
